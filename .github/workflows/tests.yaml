@@ -1,14 +1,11 @@
 name: Tests
 
 on:
-  push:
-    branches:
-      - main
-      - feat/**
   workflow_run:
     workflows: ["Build"]
-    types: [requested]
+    types: [completed]
     branches:
+      - 'main'
       - 'feat/**'
 
 jobs:
