@@ -5,7 +5,9 @@ on:
     workflows: ["Build"]
     types:
       - completed
-  workflow_dispatch:
+    branches:
+      - main
+      - feat/run-tests-in-ci
 
 jobs:
   test:
