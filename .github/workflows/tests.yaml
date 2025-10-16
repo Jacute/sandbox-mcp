@@ -1,0 +1,34 @@
+name: Tests
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-dist
+          path: dist/
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Make test script executable
+        run: chmod +x ./test/run_tests.sh
+
+      - name: Prepare config
+        run: |
+          echo '{"mcpServers": {"sandbox-mcp": {"command": "./dist/sandbox-mcp","args": ["--stdio"]}}}' > ./test/config.json
+
+      - name: Run tests
+        run: ./test/run_tests.sh

@@ -18,8 +18,14 @@ jobs:
       with:
         go-version: '1.23.4'
 
-    - name: Craete dist dir
+    - name: Create dist dir
       run: mkdir -p dist
 
     - name: Build
       run: go build -ldflags="-X 'github.com/pottekkat/sandbox-mcp/internal/version.Version=$$(git describe --tags)' -X 'github.com/pottekkat/sandbox-mcp/internal/version.CommitSHA=$$(git rev-parse --short HEAD)'" -o dist/sandbox-mcp ./cmd/sandbox-mcp/main.go
+    
+    - uses: actions/upload-artifact@v4
+      with:
+        name: app-dist
+        path: dist/
+
