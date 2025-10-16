@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feat/run-tests-in-ci
   pull_request:
 
 jobs:
