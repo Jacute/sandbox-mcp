@@ -51,6 +51,12 @@ jobs:
       - name: Prepare config
         run: |
           echo '{"mcpServers": {"sandbox-mcp": {"command": "./dist/sandbox-mcp","args": ["--stdio"]}}}' > ./test/config.json
+      
+      - name: Pull sandboxes
+        run: "./dist/sandbox-mcp -pull"
+      
+      - name: Build sandboxes
+        run: "./dist/sandbox-mcp -build"
 
       - name: Run tests
         run: ./test/run_tests.sh
