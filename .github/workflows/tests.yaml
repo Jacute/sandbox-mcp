@@ -52,6 +52,9 @@ jobs:
         run: |
           echo '{"mcpServers": {"sandbox-mcp": {"command": "./dist/sandbox-mcp","args": ["--stdio"]}}}' > ./test/config.json
       
+      - name: Chmod sandbox-mcp
+        run : chmod +x ./dist/sandbox-mcp
+
       - name: Pull sandboxes
         run: "./dist/sandbox-mcp -pull"
       
