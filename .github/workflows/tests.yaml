@@ -3,11 +3,9 @@ name: Tests
 on:
   workflow_run:
     workflows: ["Build"]
-    types:
-      - completed
+    types: [requested]
     branches:
-      - main
-      - feat/run-tests-in-ci
+      - 'feat/**'
 
 jobs:
   test:
